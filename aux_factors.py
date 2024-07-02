@@ -25,27 +25,3 @@ def discounted_price(demand, price):
     else:
         return price 
 
-
-
-
-def req_2(future_years,
-          predicate_demand,
-          predicate_material_2_prices,
-          predicate_prices,
-          model_material_1):
-    future_costs = []
-    future_revenues = []
-    future_profits = []
-
-    for i, year in enumerate(future_years.flatten()):
-        demand = predicted_demand[i]
-        material_2_price = discounted_price(demand, predicted_material_2_prices[i])
-        total_material_2_cost = material_2_price * demand
-        total_revenue = predicted_prices[i] * demand
-        total_cost = total_material_2_cost + model_material_1.predict(np.array([[year]]))[0]
-        profit = total_revenue - total_cost
-        future_costs.append(total_cost)
-        future_revenues.append(total_revenue)
-        future_profits.append(profit)
-
-    return future_costs , future_revenues, future_profits
